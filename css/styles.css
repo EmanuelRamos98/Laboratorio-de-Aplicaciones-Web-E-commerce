@@ -1,3 +1,95 @@
+:root {
+    --color-primario: #4dabf7;
+    --color-primario-hover: #74c0fc;
+    --color-texto-sobre-primario: #0b1220;
+    --color-fondo: #121418;
+    --color-superficie: #1c1f26;
+    --color-borde: #2c313a;
+    --color-texto: #e9ecef;
+    --color-texto-suave: #adb5bd;
+    --color-imagen-fondo: #ffffff;
+
+    --fuente-base: "Poppins", sans-serif;
+    --tamano-base: 1rem;
+    --interlineado: 1.6;
+
+    --radio: 0.75rem;
+    --sombra: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.35);
+    --sombra-hover: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.5);
+    --transicion: 0.2s ease;
+}
+
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: var(--fuente-base);
+    font-size: var(--tamano-base);
+    line-height: var(--interlineado);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.btn-primario {
+    background-color: var(--color-primario);
+    color: var(--color-texto-sobre-primario);
+    border: none;
+    border-radius: var(--radio);
+    font-weight: 500;
+    transition: background-color var(--transicion);
+}
+
+.btn-primario:hover,
+.btn-primario:focus-visible {
+    background-color: var(--color-primario-hover);
+    color: var(--color-texto-sobre-primario);
+}
+
+.card-producto {
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    transition:
+        transform var(--transicion),
+        box-shadow var(--transicion);
+}
+
+.card-producto:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-hover);
+}
+
+.card-producto .card-img-top {
+    height: 200px;
+    padding: 1rem;
+    object-fit: contain;
+    background-color: var(--color-imagen-fondo);
+}
+
+.card-producto .card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-producto .card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--color-texto-suave);
+    font-size: 0.875rem;
+}
+
+.precio {
+    color: var(--color-primario);
+    font-size: 1.25rem;
+    font-weight: 600;
 }
