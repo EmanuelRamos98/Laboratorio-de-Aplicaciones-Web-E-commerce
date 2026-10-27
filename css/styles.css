@@ -93,3 +93,44 @@ h3 {
     font-size: 1.25rem;
     font-weight: 600;
 }
+
+.logo {
+    color: var(--color-primario);
+    letter-spacing: 0.05em;
+}
+
+.logo:hover {
+    color: var(--color-primario-hover);
+}
+
+.buscador {
+    max-width: 32rem;
+}
+
+.buscador .form-control:focus {
+    border-color: var(--color-primario);
+    box-shadow: 0 0 0 0.2rem rgba(77, 171, 247, 0.25);
+}
+
+.nav-categorias {
+    background-color: var(--color-superficie);
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.nav-categorias .nav-link {
+    color: var(--color-texto-suave);
+    border-radius: var(--radio);
+    white-space: nowrap;
+    transition:
+        background-color var(--transicion),
+        color var(--transicion);
+}
+
+.nav-categorias .nav-link:hover {
+    color: var(--color-texto);
+}
+
+.nav-categorias .nav-link.active {
+    background-color: var(--color-primario);
+    color: var(--color-texto-sobre-primario);
+}
