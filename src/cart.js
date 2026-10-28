@@ -7,6 +7,12 @@ export const agregarAlCarrito = (producto) => {
     const existe = carrito.find((pro) => pro.id === producto.id);
     if (!existe) carrito.push({ ...producto, cantidad: 1 });
     localStorage.setItem("cart", JSON.stringify(carrito));
+
+    Toast.fire({
+        icon: "success",
+        title: "¡Producto agregado con exito!",
+    });
+
     return renderizarCarrito();
 };
 
@@ -65,6 +71,18 @@ export const renderizarCarrito = () => {
         `;
     });
 
+    template += `
+        <div class="mt-4 mb-2">
+            <button type="button" class="btn btn-primary w-100 mb-3" id="btn-finalizar-compra">
+                Finalizar compra
+            </button>
+
+            <button type="button" class="btn btn-danger w-100 btn-vaciar-carrito" id="btn-vaciar-carrito">
+                Eliminar todos los productos
+            </button>
+        </div>
+    `;
+
     cartContenedor.innerHTML = template;
 
     cartContenedor.querySelectorAll(".btn-eliminar").forEach((btn) => {
@@ -84,6 +102,10 @@ export const renderizarCarrito = () => {
             modificarCantidad(Number(btn.dataset.id), -1),
         );
     });
+
+    cartContenedor
+        .querySelector("#btn-vaciar-carrito")
+        .addEventListener("click", () => vaciarCarrito());
 };
 
 const eliminarDelCarrito = (id) => {
@@ -98,6 +120,26 @@ const modificarCantidad = (id, delta) => {
         item.cantidad = Math.max(1, item.cantidad + delta);
         localStorage.setItem("cart", JSON.stringify(carrito));
 
-        renderizarCarrito();
+        return renderizarCarrito();
     }
 };
+
+const vaciarCarrito = () => {
+    carrito = [];
+    localStorage.removeItem("cart");
+    return renderizarCarrito();
+};
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-start",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    background: "#212529",
+    color: "#fff",
+    didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+    },
+});

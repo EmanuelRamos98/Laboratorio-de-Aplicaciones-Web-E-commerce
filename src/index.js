@@ -1,5 +1,5 @@
 import { getProductos } from "./api.js";
-import { getCarrito, renderizarCarrito } from "./cart.js";
+import { renderizarCarrito } from "./cart.js";
 import { renderProductos } from "./ui.js";
 
 let productList = document.querySelector("#product-list");
