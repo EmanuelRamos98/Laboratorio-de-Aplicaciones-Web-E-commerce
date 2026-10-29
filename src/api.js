@@ -1,12 +1,15 @@
 export const getProductos = () => {
     const response = fetch("https://fakestoreapi.com/products")
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            return response.json();
+        })
         .then((data) => {
             console.table(data);
-            return data
-        })
-        .catch((_err) => console.log("Erro: ", _err));
+            return data;
+        });
 
-    
     return response;
 };
