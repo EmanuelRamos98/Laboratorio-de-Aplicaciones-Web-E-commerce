@@ -160,6 +160,53 @@
             </div>
         </footer>
 
+        <div class="modal fade" id="modalProducto" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-content p-3">
+                    <div class="modal-header align-items-start border-0 pb-0">
+                        <h2
+                            class="modal-title fs-6 fw-normal text-start pe-3"
+                            id="modal-titulo"
+                        ></h2>
+
+                        <div class="d-flex align-items-center ms-auto">
+                            <span
+                                class="badge text-dark me-3 rounded-0 px-2 py-1"
+                                style="background-color: #0dcaf0"
+                                id="modal-precio"
+                            ></span>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Cerrar"
+                            ></button>
+                        </div>
+                    </div>
+
+                    <div class="modal-body text-center p-3">
+                        <img
+                            src=""
+                            class="img-fluid rounded"
+                            id="modal-imagen"
+                            alt=""
+                        />
+                    </div>
+
+                    <div class="modal-footer border-0 pt-0">
+                        <button
+                            type="button"
+                            class="btn btn-primario w-100"
+                            id="btn-agregar-modal"
+                        >
+                            <i class="bi bi-cart-plus" aria-hidden="true"></i>
+                            Agregar al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

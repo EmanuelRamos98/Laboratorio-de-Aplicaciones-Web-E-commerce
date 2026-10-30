@@ -114,6 +114,10 @@ export const renderizarCarrito = () => {
     cartContenedor
         .querySelector("#btn-vaciar-carrito")
         .addEventListener("click", () => vaciarCarrito());
+
+    cartContenedor
+        .querySelector("#btn-finalizar-compra")
+        .addEventListener("click", () => vaciarCarrito());
 };
 
 const eliminarDelCarrito = (id) => {
