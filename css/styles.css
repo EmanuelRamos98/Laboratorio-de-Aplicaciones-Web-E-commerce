@@ -134,3 +134,10 @@ h3 {
     background-color: var(--color-primario);
     color: var(--color-texto-sobre-primario);
 }
+
+.contenedor-cart-count {
+    display: none;
+}
+.contenedor-cart-count.active {
+    display: block;
+}

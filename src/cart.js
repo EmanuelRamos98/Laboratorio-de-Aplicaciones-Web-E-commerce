@@ -1,4 +1,7 @@
 let cartContenedor = document.getElementById("cart-items");
+let contadorCart = document.getElementById("cart-count");
+let contenedorCartCount = document.getElementById("contenedor-cart-count");
+
 let carrito = JSON.parse(localStorage.getItem("cart")) || [];
 
 export const getCarrito = () => carrito;
@@ -20,6 +23,7 @@ export const renderizarCarrito = () => {
     let template = "";
     if (carrito.length === 0) {
         cartContenedor.innerHTML = `<p class="text-body-secondary text-center mt-4">Tu carrito está vacío.</p>`;
+        contenedorCartCount.classList.remove("active");
         return;
     }
 
@@ -84,6 +88,10 @@ export const renderizarCarrito = () => {
     `;
 
     cartContenedor.innerHTML = template;
+
+    contenedorCartCount.classList.add("active");
+    const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+    contadorCart.innerHTML = total;
 
     cartContenedor.querySelectorAll(".btn-eliminar").forEach((btn) => {
         btn.addEventListener("click", () =>
