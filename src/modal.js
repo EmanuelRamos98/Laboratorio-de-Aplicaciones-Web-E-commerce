@@ -15,14 +15,15 @@ export const abrirModalDetalle = (producto) => {
     if (!modalBootstrap) {
         modalBootstrap = new bootstrap.Modal(modalElement);
 
+        modalElement.addEventListener("hide.bs.modal", () => {
+            if (modalElement.contains(document.activeElement)) {
+                document.activeElement.blur();
+            }
+        });
+
         btnAgregar.addEventListener("click", () => {
             if (productoModalActual) {
                 agregarAlCarrito(productoModalActual);
-
-                if (document.activeElement) {
-                    document.activeElement.blur();
-                }
-
                 modalBootstrap.hide();
             }
         });
