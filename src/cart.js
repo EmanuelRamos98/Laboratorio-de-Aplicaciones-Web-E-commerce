@@ -117,7 +117,20 @@ export const renderizarCarrito = () => {
 
     cartContenedor
         .querySelector("#btn-finalizar-compra")
-        .addEventListener("click", () => vaciarCarrito());
+        .addEventListener("click", () => finalizarCompra());
+};
+
+const finalizarCompra = () => {
+    vaciarCarrito();
+
+    bootstrap.Offcanvas.getOrCreateInstance(
+        document.getElementById("cartSidebar"),
+    ).hide();
+
+    Toast.fire({
+        icon: "success",
+        title: "¡Compra finalizada con éxito!",
+    });
 };
 
 const eliminarDelCarrito = (id) => {
