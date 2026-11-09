@@ -87,14 +87,30 @@ searchInput.form.addEventListener("submit", (evento) => {
   evento.preventDefault();
 });
 
-categoryList.addEventListener("click", (evento) => {
-  const link = evento.target.closest("[data-categoria]");
-  if (!link) return;
+const leerCategoriaDeUrl = () =>
+  new URLSearchParams(window.location.search).get("category") ?? "todas";
 
-  evento.preventDefault();
+const guardarCategoriaEnUrl = (categoria) => {
+  const url = new URL(window.location.href);
+
+  if (categoria === "todas") {
+    url.searchParams.delete("category");
+  } else {
+    url.searchParams.set("category", categoria);
+  }
+
+  history.pushState(null, "", url);
+};
+
+const seleccionarCategoria = (categoria) => {
+  const links = [...categoryList.querySelectorAll("[data-categoria]")];
+  const link =
+    links.find((item) => item.dataset.categoria === categoria) ??
+    links.find((item) => item.dataset.categoria === "todas");
+
   categoriaSeleccionada = link.dataset.categoria;
 
-  categoryList.querySelectorAll("[data-categoria]").forEach((item) => {
+  links.forEach((item) => {
     item.classList.remove("active");
     item.removeAttribute("aria-current");
   });
@@ -103,6 +119,23 @@ categoryList.addEventListener("click", (evento) => {
   link.setAttribute("aria-current", "page");
 
   aplicarFiltros();
+};
+
+categoryList.addEventListener("click", (evento) => {
+  const link = evento.target.closest("[data-categoria]");
+  if (!link) return;
+
+  evento.preventDefault();
+
+  const categoria = link.dataset.categoria;
+  if (categoria === categoriaSeleccionada) return;
+
+  seleccionarCategoria(categoria);
+  guardarCategoriaEnUrl(categoria);
+});
+
+window.addEventListener("popstate", () => {
+  seleccionarCategoria(leerCategoriaDeUrl());
 });
 
 const cargarProductos = () => {
@@ -114,7 +147,7 @@ const cargarProductos = () => {
       const categorias = [...new Set(productos.map((p) => p.category))];
       renderCategorias(categorias, categoryList);
       renderProductos(allProducts, productList);
-      aplicarFiltros();
+      seleccionarCategoria(leerCategoriaDeUrl());
     })
     .catch((err) => {
       console.error("Error: ", err);
