@@ -1,10 +1,16 @@
 import { getProductos } from "./api.js";
 import { renderizarCarrito } from "./cart.js";
-import { mostrarError, mostrarSpinner, renderProductos } from "./ui.js";
+import {
+  etiquetaCategoria,
+  mostrarError,
+  mostrarSpinner,
+  renderCategorias,
+  renderProductos,
+} from "./ui.js";
 
 const productList = document.querySelector("#product-list");
 const searchInput = document.querySelector("#search-input");
-const categoryLinks = document.querySelectorAll("[data-categoria]");
+const categoryList = document.querySelector("#category-list");
 
 let allProducts = [];
 let textoBuscado = "";
@@ -37,22 +43,13 @@ const aplicarFiltros = () => {
     const categoria = normalizarTexto(producto.category);
     const titulo = normalizarTexto(producto.title);
 
-    let coincideBusqueda;
+    const etiqueta = normalizarTexto(etiquetaCategoria(producto.category));
+    const coincideEtiqueta = texto
+      .split(/\s+/)
+      .every((palabra) => etiqueta.includes(palabra));
 
-    if (texto === "joyeria") {
-      coincideBusqueda = categoria === "jewelery";
-    } else if (texto === "ropa") {
-      coincideBusqueda =
-        categoria === "men's clothing" ||
-        categoria === "women's clothing";
-    } else if (["hombre", "ropa hombre", "ropa de hombre"].includes(texto)) {
-      coincideBusqueda = categoria === "men's clothing";
-    } else if (["mujer", "ropa mujer", "ropa de mujer"].includes(texto)) {
-      coincideBusqueda = categoria === "women's clothing";
-    } else {
-      coincideBusqueda =
-        titulo.includes(texto) || categoria.includes(texto);
-    }
+    const coincideBusqueda =
+      titulo.includes(texto) || categoria.includes(texto) || coincideEtiqueta;
 
     const coincideCategoria =
       categoriaSeleccionada === "todas" ||
@@ -90,21 +87,22 @@ searchInput.form.addEventListener("submit", (evento) => {
   evento.preventDefault();
 });
 
-categoryLinks.forEach((link) => {
-  link.addEventListener("click", (evento) => {
-    evento.preventDefault();
-    categoriaSeleccionada = link.dataset.categoria;
+categoryList.addEventListener("click", (evento) => {
+  const link = evento.target.closest("[data-categoria]");
+  if (!link) return;
 
-    categoryLinks.forEach((item) => {
-      item.classList.remove("active");
-      item.removeAttribute("aria-current");
-    });
+  evento.preventDefault();
+  categoriaSeleccionada = link.dataset.categoria;
 
-    link.classList.add("active");
-    link.setAttribute("aria-current", "page");
-
-    aplicarFiltros();
+  categoryList.querySelectorAll("[data-categoria]").forEach((item) => {
+    item.classList.remove("active");
+    item.removeAttribute("aria-current");
   });
+
+  link.classList.add("active");
+  link.setAttribute("aria-current", "page");
+
+  aplicarFiltros();
 });
 
 const cargarProductos = () => {
@@ -113,6 +111,8 @@ const cargarProductos = () => {
   getProductos()
     .then((productos) => {
       allProducts = productos;
+      const categorias = [...new Set(productos.map((p) => p.category))];
+      renderCategorias(categorias, categoryList);
       renderProductos(allProducts, productList);
       aplicarFiltros();
     })

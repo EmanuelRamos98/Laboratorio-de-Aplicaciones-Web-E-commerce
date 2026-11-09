@@ -1,6 +1,37 @@
 import { agregarAlCarrito } from "./cart.js";
 import { abrirModalDetalle } from "./modal.js";
 
+const MAP_CATEGORIES = {
+    electronics: "Electrónica",
+    jewelery: "Joyería",
+    "men's clothing": "Ropa de hombre",
+    "women's clothing": "Ropa de mujer",
+};
+
+export const etiquetaCategoria = (categoria) =>
+    MAP_CATEGORIES[categoria] ??
+    categoria.charAt(0).toUpperCase() + categoria.slice(1);
+
+export const renderCategorias = (categorias, lista) => {
+    const ordenadas = [...categorias].sort((a, b) =>
+        etiquetaCategoria(a).localeCompare(etiquetaCategoria(b), "es"),
+    );
+
+    ordenadas.forEach((categoria) => {
+        const item = document.createElement("li");
+        item.className = "nav-item";
+
+        const link = document.createElement("a");
+        link.className = "nav-link";
+        link.href = "#";
+        link.dataset.categoria = categoria;
+        link.textContent = etiquetaCategoria(categoria);
+
+        item.append(link);
+        lista.append(item);
+    });
+};
+
 export const mostrarSpinner = (contenedor) => {
     contenedor.innerHTML = `
                 <div class="col-12 d-flex justify-content-center py-5">
