@@ -37,7 +37,7 @@ const aplicarFiltros = () => {
 
     let coincideBusqueda;
 
-    if (texto.length > 0 && "joyeria".startsWith(texto)) {
+    if (texto === "joyeria") {
       coincideBusqueda = categoria === "jewelery";
     } else if (texto === "ropa") {
       coincideBusqueda =
