@@ -25,6 +25,8 @@ const aplicarFiltros = () => {
 
   const tarjetas = productList.querySelectorAll(".card-producto");
 
+  if (tarjetas.length === 0) return;
+
   tarjetas.forEach((tarjeta) => {
     const producto = allProducts.find(
       (item) => item.id === Number(tarjeta.dataset.id)

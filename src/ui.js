@@ -56,7 +56,7 @@ export const renderProductos = (productos, contenedor) => {
     });
     contenedor.innerHTML = template;
 
-    contenedor.addEventListener("click", (e) => {
+    contenedor.onclick = (e) => {
         const card = e.target.closest(".card-producto");
         if (card) {
             const producto = productos.find(
@@ -66,5 +66,5 @@ export const renderProductos = (productos, contenedor) => {
         } else {
             return;
         }
-    });
+    };
 };
