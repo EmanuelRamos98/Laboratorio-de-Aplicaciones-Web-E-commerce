@@ -84,6 +84,10 @@ searchInput.addEventListener("input", (evento) => {
   aplicarFiltros();
 });
 
+searchInput.form.addEventListener("submit", (evento) => {
+  evento.preventDefault();
+});
+
 categoryLinks.forEach((link) => {
   link.addEventListener("click", (evento) => {
     evento.preventDefault();
