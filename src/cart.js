@@ -8,7 +8,11 @@ export const getCarrito = () => carrito;
 
 export const agregarAlCarrito = (producto) => {
     const existe = carrito.find((pro) => pro.id === producto.id);
-    if (!existe) carrito.push({ ...producto, cantidad: 1 });
+    if (existe) {
+        existe.cantidad += 1;
+    } else {
+        carrito.push({ ...producto, cantidad: 1 });
+    }
     localStorage.setItem("cart", JSON.stringify(carrito));
 
     Toast.fire({
