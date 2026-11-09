@@ -48,8 +48,8 @@ export const renderizarCarrito = () => {
                                 <!-- Sección recuadrada en rojo en tu imagen (Controles) -->
                                 <div class="d-flex align-items-center gap-2 mt-3 mb-3">
                                     <!-- Botón Restar -->
-                                    <button class="btn btn-primary btn-sm btn-restar" data-id="${pro.id}">
-                                        <i class="bi bi-cart-dash"></i>
+                                    <button class="btn btn-primary btn-sm btn-restar" data-id="${pro.id}" aria-label="Restar una unidad de ${pro.title}">
+                                        <i class="bi bi-cart-dash" aria-hidden="true"></i>
                                     </button>
                                     
                                     <!-- Cantidad -->
@@ -58,13 +58,13 @@ export const renderizarCarrito = () => {
                                     </span>
                                     
                                     <!-- Botón Sumar -->
-                                    <button class="btn btn-primary btn-sm btn-sumar" data-id="${pro.id}">
-                                        <i class="bi bi-cart-plus"></i>
+                                    <button class="btn btn-primary btn-sm btn-sumar" data-id="${pro.id}" aria-label="Sumar una unidad de ${pro.title}">
+                                        <i class="bi bi-cart-plus" aria-hidden="true"></i>
                                     </button>
                                     
                                     <!-- Botón Eliminar -->
-                                    <button class="btn btn-danger btn-sm btn-eliminar ms-1" data-id="${pro.id}">
-                                        <i class="bi bi-trash"></i>
+                                    <button class="btn btn-danger btn-sm btn-eliminar ms-1" data-id="${pro.id}" aria-label="Eliminar ${pro.title} del carrito">
+                                        <i class="bi bi-trash" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 

@@ -2,9 +2,11 @@ import { agregarAlCarrito } from "./cart.js";
 
 let productoModalActual = null;
 let modalBootstrap = null;
+let elementoPrevio = null;
 
 export const abrirModalDetalle = (producto) => {
     productoModalActual = producto;
+    elementoPrevio = document.activeElement;
 
     const modalElement = document.getElementById("modalProducto");
     const titulo = document.getElementById("modal-titulo");
@@ -19,6 +21,10 @@ export const abrirModalDetalle = (producto) => {
             if (modalElement.contains(document.activeElement)) {
                 document.activeElement.blur();
             }
+        });
+
+        modalElement.addEventListener("hidden.bs.modal", () => {
+            elementoPrevio?.focus();
         });
 
         btnAgregar.addEventListener("click", () => {
