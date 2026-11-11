@@ -1,3 +1,5 @@
+import { abrirModalCheckout } from "./checkout.js";
+
 let cartContenedor = document.getElementById("cart-items");
 let contadorCart = document.getElementById("cart-count");
 let contenedorCartCount = document.getElementById("contenedor-cart-count");
@@ -98,43 +100,24 @@ export const renderizarCarrito = () => {
     contadorCart.innerHTML = total;
 
     cartContenedor.querySelectorAll(".btn-eliminar").forEach((btn) => {
-        btn.addEventListener("click", () =>
-            eliminarDelCarrito(Number(btn.dataset.id)),
-        );
+        btn.addEventListener("click", () => eliminarDelCarrito(Number(btn.dataset.id)));
     });
 
     cartContenedor.querySelectorAll(".btn-sumar").forEach((btn) => {
-        btn.addEventListener("click", () =>
-            modificarCantidad(Number(btn.dataset.id), 1),
-        );
+        btn.addEventListener("click", () => modificarCantidad(Number(btn.dataset.id), 1));
     });
 
     cartContenedor.querySelectorAll(".btn-restar").forEach((btn) => {
-        btn.addEventListener("click", () =>
-            modificarCantidad(Number(btn.dataset.id), -1),
-        );
+        btn.addEventListener("click", () => modificarCantidad(Number(btn.dataset.id), -1));
     });
 
-    cartContenedor
-        .querySelector("#btn-vaciar-carrito")
-        .addEventListener("click", () => vaciarCarrito());
+    cartContenedor.querySelector("#btn-vaciar-carrito").addEventListener("click", () => vaciarCarrito());
 
-    cartContenedor
-        .querySelector("#btn-finalizar-compra")
-        .addEventListener("click", () => finalizarCompra());
+    cartContenedor.querySelector("#btn-finalizar-compra").addEventListener("click", () => finalizarCompra());
 };
 
 const finalizarCompra = () => {
-    vaciarCarrito();
-
-    bootstrap.Offcanvas.getOrCreateInstance(
-        document.getElementById("cartSidebar"),
-    ).hide();
-
-    Toast.fire({
-        icon: "success",
-        title: "¡Compra finalizada con éxito!",
-    });
+    abrirModalCheckout();
 };
 
 const eliminarDelCarrito = (id) => {
@@ -153,7 +136,7 @@ const modificarCantidad = (id, delta) => {
     }
 };
 
-const vaciarCarrito = () => {
+export const vaciarCarrito = () => {
     carrito = [];
     localStorage.removeItem("cart");
     return renderizarCarrito();
