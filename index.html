@@ -143,8 +143,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="telefono" pattern="[0-9]{8,15}" required />
-                                    <div class="invalid-feedback">Ingresá un teléfono válido (solo números, mínimo 8 dígitos).</div>
+                                    <input type="tel" class="form-control" id="telefono" pattern="(?=(?:\D*\d){8,15}\D*$)\+?[\d \-\(\)]+" placeholder="11 5555-1234" required />
+                                    <div class="invalid-feedback">Ingresá un teléfono válido, con al menos 8 números (ej: 11 5555-1234).</div>
                                 </div>
 
                                 <div class="col-12">
@@ -160,8 +160,8 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="cp" class="form-label">Código Postal</label>
-                                    <input type="text" class="form-control" id="cp" pattern="[0-9]{4,8}" required />
-                                    <div class="invalid-feedback">Tu CP debe ser numérico.</div>
+                                    <input type="text" class="form-control" id="cp" pattern="[0-9]{4}|[A-Za-z][0-9]{4}[A-Za-z]{3}" placeholder="1043 o C1043AAZ" required />
+                                    <div class="invalid-feedback">Ingresá un CP válido (ej: 1043 o C1043AAZ).</div>
                                 </div>
                             </div>
                             <div class="modal-footer border-0 px-0 mt-4 pb-0">
