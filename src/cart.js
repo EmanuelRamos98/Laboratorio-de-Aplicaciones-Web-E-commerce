@@ -150,7 +150,11 @@ const eliminarDelCarrito = (id) => {
 const modificarCantidad = (id, delta) => {
     const item = carrito.find((item) => item.id === id);
     if (item) {
-        item.cantidad = Math.max(1, item.cantidad + delta);
+        if (item.cantidad + delta < 1) {
+            return eliminarDelCarrito(id);
+        }
+
+        item.cantidad += delta;
         localStorage.setItem("cart", JSON.stringify(carrito));
 
         return renderizarCarrito();
