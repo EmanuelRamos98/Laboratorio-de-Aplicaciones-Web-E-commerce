@@ -46,6 +46,9 @@ formCheckout.addEventListener("submit", (e) => {
     // Ocultamos el modal
     modalCheckoutBootstrap.hide();
 
+    // El pedido ya esta confirmado: vaciamos el carrito sin importar como se cierre la alerta
+    vaciarCarrito();
+
     // Mostramos alerta
     Swal.fire({
         icon: "success",
@@ -67,9 +70,5 @@ formCheckout.addEventListener("submit", (e) => {
         },
         confirmButtonText: "Entendido",
         allowOutsideClick: false,
-    }).then((result) => {
-        if (result.isConfirmed) {
-            vaciarCarrito();
-        }
     });
 });
