@@ -76,7 +76,14 @@
                     <span id="cart-total">$ 0.00</span>
                 </div>
                 <button type="button" class="btn btn-primary w-100 mb-2" id="btn-finalizar-compra">Finalizar compra</button>
-                <button type="button" class="btn btn-danger w-100 btn-vaciar-carrito" id="btn-vaciar-carrito">Eliminar todos los productos</button>
+                <button type="button" class="btn btn-link btn-sm link-danger w-100 mt-2 btn-vaciar-carrito" id="btn-vaciar-carrito">Vaciar carrito</button>
+                <div class="d-none mt-3" id="confirmar-vaciar">
+                    <p class="small text-center mb-2" role="status">¿Seguro que querés eliminar todos los productos?</p>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-outline-light w-50" id="btn-cancelar-vaciar">Cancelar</button>
+                        <button type="button" class="btn btn-danger w-50" id="btn-confirmar-vaciar">Sí, vaciar</button>
+                    </div>
+                </div>
             </div>
         </aside>
 

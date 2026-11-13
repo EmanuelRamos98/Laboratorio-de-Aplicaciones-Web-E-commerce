@@ -8,8 +8,30 @@ const cartFooter = document.getElementById("cart-footer");
 const cartTotal = document.getElementById("cart-total");
 const btnVaciar = document.getElementById("btn-vaciar-carrito");
 const btnFinalizar = document.getElementById("btn-finalizar-compra");
+const confirmarVaciar = document.getElementById("confirmar-vaciar");
+const btnCancelarVaciar = document.getElementById("btn-cancelar-vaciar");
+const btnConfirmarVaciar = document.getElementById("btn-confirmar-vaciar");
 
-btnVaciar.addEventListener("click", () => vaciarCarrito());
+const mostrarConfirmacionVaciar = () => {
+    btnVaciar.classList.add("d-none");
+    confirmarVaciar.classList.remove("d-none");
+    btnCancelarVaciar.focus();
+};
+
+const ocultarConfirmacionVaciar = () => {
+    confirmarVaciar.classList.add("d-none");
+    btnVaciar.classList.remove("d-none");
+};
+
+btnVaciar.addEventListener("click", () => mostrarConfirmacionVaciar());
+btnCancelarVaciar.addEventListener("click", () => {
+    ocultarConfirmacionVaciar();
+    btnVaciar.focus();
+});
+btnConfirmarVaciar.addEventListener("click", () => vaciarCarrito());
+document
+    .getElementById("cartSidebar")
+    .addEventListener("hidden.bs.offcanvas", () => ocultarConfirmacionVaciar());
 btnFinalizar.addEventListener("click", () => abrirModalCheckout());
 
 let carrito = JSON.parse(localStorage.getItem("cart")) || [];
@@ -37,6 +59,7 @@ export const agregarAlCarrito = (producto) => {
 };
 
 export const renderizarCarrito = () => {
+    ocultarConfirmacionVaciar();
     let template = "";
     if (carrito.length === 0) {
         cartContenedor.innerHTML = `<p class="text-body-secondary text-center mt-4">Tu carrito está vacío.</p>`;
