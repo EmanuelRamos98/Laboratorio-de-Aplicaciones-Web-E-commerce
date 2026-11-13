@@ -4,6 +4,12 @@ const modalCheckoutElement = document.getElementById("modalCheckout");
 const modalCheckoutBootstrap = new bootstrap.Modal(modalCheckoutElement);
 const formCheckout = document.getElementById("form-checkout");
 
+modalCheckoutElement.addEventListener("hide.bs.modal", () => {
+    if (document.activeElement) {
+        document.activeElement.blur();
+    }
+});
+
 export const abrirModalCheckout = () => {
     const offcanvasElement = document.getElementById("cartSidebar");
     const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
@@ -33,9 +39,7 @@ formCheckout.addEventListener("submit", (e) => {
     const ciudad = document.getElementById("ciudad").value;
     const email = document.getElementById("email").value;
 
-    if (document.activeElement) {
-        document.activeElement.blur();
-    }
+    modalCheckoutBootstrap.hide();
 
     // Ocultamos el modal
     modalCheckoutBootstrap.hide();

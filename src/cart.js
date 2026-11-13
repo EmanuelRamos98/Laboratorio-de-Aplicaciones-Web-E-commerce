@@ -4,6 +4,13 @@ let cartContenedor = document.getElementById("cart-items");
 let contadorCart = document.getElementById("cart-count");
 let contenedorCartCount = document.getElementById("contenedor-cart-count");
 
+const cartFooter = document.getElementById("cart-footer");
+const btnVaciar = document.getElementById("btn-vaciar-carrito");
+const btnFinalizar = document.getElementById("btn-finalizar-compra");
+
+btnVaciar.addEventListener("click", () => vaciarCarrito());
+btnFinalizar.addEventListener("click", () => abrirModalCheckout());
+
 let carrito = JSON.parse(localStorage.getItem("cart")) || [];
 
 export const getCarrito = () => carrito;
@@ -30,6 +37,7 @@ export const renderizarCarrito = () => {
     if (carrito.length === 0) {
         cartContenedor.innerHTML = `<p class="text-body-secondary text-center mt-4">Tu carrito está vacío.</p>`;
         contenedorCartCount.classList.remove("active");
+        cartFooter.style.display = "none";
         return;
     }
 
@@ -81,19 +89,9 @@ export const renderizarCarrito = () => {
         `;
     });
 
-    template += `
-        <div class="mt-4 mb-2">
-            <button type="button" class="btn btn-primary w-100 mb-3" id="btn-finalizar-compra">
-                Finalizar compra
-            </button>
-
-            <button type="button" class="btn btn-danger w-100 btn-vaciar-carrito" id="btn-vaciar-carrito">
-                Eliminar todos los productos
-            </button>
-        </div>
-    `;
-
     cartContenedor.innerHTML = template;
+
+    cartFooter.style.display = "block";
 
     contenedorCartCount.classList.add("active");
     const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);
@@ -110,12 +108,7 @@ export const renderizarCarrito = () => {
     cartContenedor.querySelectorAll(".btn-restar").forEach((btn) => {
         btn.addEventListener("click", () => modificarCantidad(Number(btn.dataset.id), -1));
     });
-
-    cartContenedor.querySelector("#btn-vaciar-carrito").addEventListener("click", () => vaciarCarrito());
-
-    cartContenedor.querySelector("#btn-finalizar-compra").addEventListener("click", () => finalizarCompra());
 };
-
 const finalizarCompra = () => {
     abrirModalCheckout();
 };
