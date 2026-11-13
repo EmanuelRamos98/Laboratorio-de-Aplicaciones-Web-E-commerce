@@ -5,6 +5,7 @@ let contadorCart = document.getElementById("cart-count");
 let contenedorCartCount = document.getElementById("contenedor-cart-count");
 
 const cartFooter = document.getElementById("cart-footer");
+const cartTotal = document.getElementById("cart-total");
 const btnVaciar = document.getElementById("btn-vaciar-carrito");
 const btnFinalizar = document.getElementById("btn-finalizar-compra");
 
@@ -14,6 +15,9 @@ btnFinalizar.addEventListener("click", () => abrirModalCheckout());
 let carrito = JSON.parse(localStorage.getItem("cart")) || [];
 
 export const getCarrito = () => carrito;
+
+export const getTotalCarrito = () =>
+    carrito.reduce((acc, item) => acc + item.price * item.cantidad, 0);
 
 export const agregarAlCarrito = (producto) => {
     const existe = carrito.find((pro) => pro.id === producto.id);
@@ -80,7 +84,7 @@ export const renderizarCarrito = () => {
                                 
                                 <!-- Total del producto (Precio * Cantidad) -->
                                 <p class="card-text fw-bold text-center text-md-start">
-                                    Total: $ ${(pro.price * pro.cantidad).toFixed(2)}
+                                    Subtotal: $ ${(pro.price * pro.cantidad).toFixed(2)}
                                 </p>
                             </div>
                         </div>
@@ -92,6 +96,7 @@ export const renderizarCarrito = () => {
     cartContenedor.innerHTML = template;
 
     cartFooter.style.display = "block";
+    cartTotal.textContent = `$ ${getTotalCarrito().toFixed(2)}`;
 
     contenedorCartCount.classList.add("active");
     const total = carrito.reduce((acc, item) => acc + item.cantidad, 0);

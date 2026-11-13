@@ -1,4 +1,4 @@
-import { vaciarCarrito } from "./cart.js";
+import { getTotalCarrito, vaciarCarrito } from "./cart.js";
 
 const modalCheckoutElement = document.getElementById("modalCheckout");
 const modalCheckoutBootstrap = new bootstrap.Modal(modalCheckoutElement);
@@ -19,6 +19,8 @@ export const abrirModalCheckout = () => {
 
     formCheckout.classList.remove("was-validated");
     formCheckout.reset();
+    document.getElementById("checkout-total").textContent =
+        `$ ${getTotalCarrito().toFixed(2)}`;
     modalCheckoutBootstrap.show();
 };
 
