@@ -11,6 +11,7 @@ export const abrirModalDetalle = (producto) => {
     const modalElement = document.getElementById("modalProducto");
     const titulo = document.getElementById("modal-titulo");
     const precio = document.getElementById("modal-precio");
+    const descripcion = document.getElementById("modal-descripcion");
     const imagen = document.getElementById("modal-imagen");
     const btnAgregar = document.getElementById("btn-agregar-modal");
 
@@ -37,6 +38,7 @@ export const abrirModalDetalle = (producto) => {
 
     titulo.textContent = producto.title;
     precio.textContent = `$ ${producto.price.toFixed(2)}`;
+    descripcion.textContent = producto.description;
     imagen.src = producto.image;
     imagen.alt = producto.title;
 

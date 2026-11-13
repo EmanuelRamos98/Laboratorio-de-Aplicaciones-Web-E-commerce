@@ -102,6 +102,20 @@ h3 {
     font-weight: 600;
 }
 
+.modal-producto-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background-color: var(--color-imagen-fondo);
+    border-radius: var(--radio);
+}
+
+.modal-producto-imagen img {
+    max-height: 280px;
+    object-fit: contain;
+}
+
 .logo {
     color: var(--color-primario);
     letter-spacing: 0.05em;

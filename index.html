@@ -95,26 +95,30 @@
 
         <!-- Modal agregar producto -->
         <div class="modal fade" id="modalProducto" tabindex="-1" aria-labelledby="modal-titulo">
-            <div class="modal-dialog modal-dialog-centered modal-sm">
-                <div class="modal-content p-3 d-flex flex-column" style="min-height: 400px">
-                    <div class="modal-header align-items-start border-0 pb-0">
-                        <h2 class="modal-title fs-6 fw-normal text-start pe-3" id="modal-titulo" style="display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 48px"></h2>
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header border-0 pb-0">
+                        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
 
-                        <div class="d-flex align-items-center ms-auto">
-                            <span class="badge text-dark me-3 rounded-0 px-2 py-1" style="background-color: #0dcaf0" id="modal-precio"></span>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <div class="modal-body pt-0 px-4 pb-4">
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-5">
+                                <div class="modal-producto-imagen">
+                                    <img src="" class="img-fluid" id="modal-imagen" alt="" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-7">
+                                <h2 class="modal-title fs-5 mb-2" id="modal-titulo"></h2>
+                                <p class="precio fs-3 mb-3" id="modal-precio"></p>
+                                <p class="text-body-secondary small mb-4" id="modal-descripcion"></p>
+                                <button type="button" class="btn btn-primario w-100" id="btn-agregar-modal">
+                                    <i class="bi bi-cart-plus" aria-hidden="true"></i>
+                                    Agregar al carrito
+                                </button>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="modal-body text-center p-3 d-flex align-items-center justify-content-center" style="height: 220px">
-                        <img src="" class="img-fluid rounded" id="modal-imagen" alt="" style="max-height: 100%; max-width: 100%; object-fit: contain" />
-                    </div>
-
-                    <div class="modal-footer border-0 pt-0 mt-auto">
-                        <button type="button" class="btn btn-primario w-100" id="btn-agregar-modal">
-                            <i class="bi bi-cart-plus" aria-hidden="true"></i>
-                            Agregar al carrito
-                        </button>
                     </div>
                 </div>
             </div>
